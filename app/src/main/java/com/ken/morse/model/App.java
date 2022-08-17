@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class App {
   private static Set<String> defaultEnabledApps = new HashSet<>();
@@ -76,6 +78,6 @@ public class App {
     for (ResolveInfo pkgApp : pkgAppsList) {
       apps.add(new App(context, pkgApp, prefs));
     }
-    return apps;
+    return apps.stream().sorted((app, other) -> app.appName().compareTo(other.appName())).collect(Collectors.toList());
   }
 }

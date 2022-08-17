@@ -6,6 +6,7 @@ import android.databinding.Bindable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.CompoundButton;
+
 import com.ken.morse.base.ObservableViewModel;
 import com.ken.morse.model.App;
 
@@ -57,6 +58,6 @@ public class AppViewModel extends ObservableViewModel implements Comparable<AppV
       // Enabled apps come first.
       return -Boolean.compare(enabled, otherEnabled);
     }
-    return app.appID.compareTo(other.app.appID);
+    return app.appName().compareTo(other.app.appName());
   }
 }
