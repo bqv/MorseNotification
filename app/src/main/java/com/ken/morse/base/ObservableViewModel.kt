@@ -1,30 +1,27 @@
-package com.ken.morse.base;
+package com.ken.morse.base
 
-import android.arch.lifecycle.ViewModel;
-import android.databinding.Observable;
-import android.databinding.PropertyChangeRegistry;
+import android.arch.lifecycle.ViewModel
+import android.databinding.Observable
+import android.databinding.Observable.OnPropertyChangedCallback
+import android.databinding.PropertyChangeRegistry
 
-public class ObservableViewModel extends ViewModel implements Observable {
-
-    private PropertyChangeRegistry callbacks = new PropertyChangeRegistry();
-
-    @Override
-    public void addOnPropertyChangedCallback(
-            Observable.OnPropertyChangedCallback callback) {
-        callbacks.add(callback);
+open class ObservableViewModel : ViewModel(), Observable {
+    private val callbacks = PropertyChangeRegistry()
+    override fun addOnPropertyChangedCallback(
+            callback: OnPropertyChangedCallback) {
+        callbacks.add(callback)
     }
 
-    @Override
-    public void removeOnPropertyChangedCallback(
-            Observable.OnPropertyChangedCallback callback) {
-        callbacks.remove(callback);
+    override fun removeOnPropertyChangedCallback(
+            callback: OnPropertyChangedCallback) {
+        callbacks.remove(callback)
     }
 
     /**
      * Notifies observers that all properties of this instance have changed.
      */
-    public void notifyChange() {
-        callbacks.notifyCallbacks(this, 0, null);
+    fun notifyChange() {
+        callbacks.notifyCallbacks(this, 0, null)
     }
 
     /**
@@ -34,7 +31,7 @@ public class ObservableViewModel extends ViewModel implements Observable {
      *
      * @param fieldId The generated BR id for the Bindable field.
      */
-    public void notifyChange(int fieldId) {
-        callbacks.notifyCallbacks(this, fieldId, null);
+    fun notifyChange(fieldId: Int) {
+        callbacks.notifyCallbacks(this, fieldId, null)
     }
 }

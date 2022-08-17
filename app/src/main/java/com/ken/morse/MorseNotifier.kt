@@ -1,29 +1,24 @@
-package com.ken.morse;
+package com.ken.morse
 
-import static android.content.Context.VIBRATOR_SERVICE;
-
-import android.content.Context;
-import android.os.Vibrator;
-import com.ken.morse.encoder.EncodeResult;
-import com.ken.morse.encoder.MorseEncoder;
+import android.content.Context
+import android.os.Vibrator
+import com.ken.morse.encoder.EncodeResult
+import com.ken.morse.encoder.MorseEncoder
 
 /**
  * Handles playing notifications as morse code.
  */
-public class MorseNotifier {
+class MorseNotifier(context: Context) {
+    private val mVibrator: Vibrator
+    private val converter = MorseEncoder()
+    fun notifyText(text: String?): EncodeResult {
+        val unitSignalDurationMs: Long = 100
+        val encoded = converter.encode(text!!)
+        mVibrator.vibrate(encoded.toDuration(unitSignalDurationMs), -1)
+        return encoded
+    }
 
-  private Vibrator mVibrator;
-  private final MorseEncoder converter = new MorseEncoder();
-
-  public MorseNotifier(Context context) {
-    mVibrator = (Vibrator)context.getSystemService(VIBRATOR_SERVICE);
-  }
-
-  public EncodeResult notifyText(String text) {
-    long unitSignalDurationMs = 100;
-    EncodeResult encoded = converter.encode(text);
-
-    mVibrator.vibrate(encoded.toDuration(unitSignalDurationMs), -1);
-    return encoded;
-  }
+    init {
+        mVibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+    }
 }

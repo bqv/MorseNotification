@@ -41,7 +41,7 @@ class NotificationIntercepterService : NotificationListenerService() {
             return;
         }
 
-        if (!notifier!!.isGlobalNotificationEnabled()) {
+        if (!notifier!!.isGlobalNotificationEnabled) {
             Log.d(TAG, "Global notification disabled")
             return;
         }

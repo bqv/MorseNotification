@@ -45,7 +45,7 @@ public class AppViewModel extends ObservableViewModel implements Comparable<AppV
       return;
     }
     Log.w(TAG, (isChecked?"enabled":"disabled")+": "+app.appID);
-    app.setIsNotificationEnabled(isChecked);
+    app.setNotificationEnabled(isChecked);
     super.notifyChange();
     parentViewModel.invalidateRecycler();
   }

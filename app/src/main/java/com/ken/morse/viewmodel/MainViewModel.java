@@ -6,14 +6,15 @@ import android.content.SharedPreferences;
 import android.databinding.Bindable;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+
 import com.ken.morse.MorseNotifier;
 import com.ken.morse.base.ObservableViewModel;
 import com.ken.morse.databinding.ActivityMainBinding;
 import com.ken.morse.model.App;
 import com.ken.morse.model.Notifier;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class MainViewModel extends ObservableViewModel {
   }
 
   public void onNotificationEnabledChanged(CompoundButton buttonView, boolean isChecked) {
-    notifier.setIsGlobalNotificationEnabled(isChecked);
+    notifier.setGlobalNotificationEnabled(isChecked);
     super.notifyChange();
   }
 
